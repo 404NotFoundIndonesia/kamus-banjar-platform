@@ -17,5 +17,9 @@ class DatabaseSeeder extends Seeder
             'name' => 'M. Iqbal Effendi',
             'email' => 'iqbaleff214@gmail.com',
         ]);
+        User::factory()->create([
+            'name' => 'Andika Sujanadi',
+            'email' => 'andikasujanadi@gmail.com',
+        ]);
     }
 }
