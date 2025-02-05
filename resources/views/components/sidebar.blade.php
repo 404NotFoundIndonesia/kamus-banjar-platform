@@ -2,7 +2,7 @@
 <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
     <div class="app-brand demo">
       <a href="{{ route('welcome') }}" class="app-brand-link">
-        <span class="app-brand-logo demo"><img src="{{ asset('404_Black.jpg') }}" alt="404 Not Found Indonesia" width="30" style="border-radius: 150px" srcset=""></span>
+        <span class="app-brand-logo demo"><img src="{{ asset('Logo.png') }}" alt="404 Not Found Indonesia" width="30" srcset=""></span>
         <span class="app-brand-text menu-text fw-bold ms-2 fs-5">{{ config('app.name') }}</span>
       </a>
 

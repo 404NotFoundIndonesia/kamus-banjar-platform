@@ -11,14 +11,13 @@
                         <div class="app-brand justify-content-center">
                             <a href="{{ route('welcome') }}" class="app-brand-link gap-2">
                                 <span class="app-brand-logo demo">
-                                    <img src="{{ asset('404_Black.jpg') }}" alt="404 Not Found Indonesia" width="30"
-                                         style="border-radius: 150px" srcset="">
+                                    <img src="{{ asset('Logo.png') }}" alt="404 Not Found Indonesia" width="30" srcset="">
                                 </span>
                                 <span class="app-brand-text text-body fw-bold fs-3">{{ config('app.name') }}</span>
                             </a>
                         </div>
                         <!-- /Logo -->
-                        
+
                         <h4 class="mb-2">{{ __('label.adventure_start_here') }} </h4>
                         <p class="mb-4">{{ __('label.lets_create_an_account') }}</p>
 
