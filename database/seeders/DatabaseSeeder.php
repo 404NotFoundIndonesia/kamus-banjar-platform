@@ -21,5 +21,9 @@ class DatabaseSeeder extends Seeder
             'name' => 'Andika Sujanadi',
             'email' => 'andikasujanadi@gmail.com',
         ]);
+
+        $this->call([
+            LetterSeeder::class,
+        ]);
     }
 }
