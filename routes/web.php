@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::middleware(['locale'])->group(function () {
 
-    Route::get('/', [PageController::class, 'welcome'])->name('welcome');
+    Route::redirect('/', 'dashboard')->name('welcome');
 
     Route::middleware(['auth'])->group(function () {
 

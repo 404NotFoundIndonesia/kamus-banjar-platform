@@ -59,12 +59,14 @@
                             </div>
                         </form>
 
-                        <p class="text-center">
-                            <span>{{ __('label.dont_have_an_account') }}</span>
-                            <a href="{{ route('register') }}">
-                                <span>{{ __('label.create_an_account') }}</span>
-                            </a>
-                        </p>
+                        @if($register)
+                            <p class="text-center">
+                                <span>{{ __('label.dont_have_an_account') }}</span>
+                                <a href="{{ route('register') }}">
+                                    <span>{{ __('label.create_an_account') }}</span>
+                                </a>
+                            </p>
+                        @endif
                     </div>
                 </div>
                 <!-- /Register -->
