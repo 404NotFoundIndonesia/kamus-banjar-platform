@@ -5,7 +5,7 @@
         </a>
     </p>
 
- [![GitHub Stars](https://img.shields.io/github/stars/404NotFoundIndonesia/laravel-11-sneat-template.svg)](https://github.com/iqbaleff214/kamus-banjar-api/stargazers)
+ [![GitHub Stars](https://img.shields.io/github/stars/iqbaleff214/kamus-banjar-api.svg)](https://github.com/iqbaleff214/kamus-banjar-api/stargazers)
  [![GitHub license](https://img.shields.io/github/license/iqbaleff214/kamus-banjar-api)](https://github.com/iqbaleff214/kamus-banjar-api/blob/main/LICENSE)
  
 </div>
