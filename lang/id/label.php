@@ -29,4 +29,8 @@ return [
     'cancel' => 'Batalkan',
     'new' => 'Baru',
     'detail' => 'Detail',
+    'official' => 'Resmi',
+    'community' => 'Komunitas',
+    'import_from_url' => 'Impor dari URL',
+    'import_file' => 'Impor JSON',
 ];

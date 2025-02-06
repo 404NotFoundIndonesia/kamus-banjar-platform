@@ -17,4 +17,10 @@ return [
     'password' => 'Password',
     'password_confirmation' => 'Konfirmasi Password',
     'current_password' => 'Password Sekarang',
+    'word' => 'Kosakata',
+    'letter' => 'Huruf',
+    'verified' => 'Terverifikasi',
+    'source' => 'Sumber',
+    'data' => 'Data',
+    'url' => 'URL',
 ];

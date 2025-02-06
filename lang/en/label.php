@@ -29,4 +29,8 @@ return [
     'cancel' => 'Cancel',
     'new' => 'New',
     'detail' => 'Detail',
+    'official' => 'Official',
+    'community' => 'Community',
+    'import_from_url' => 'Import from URL',
+    'import_file' => 'Import JSON File',
 ];

@@ -7,6 +7,12 @@
       "slug": "dashboard"
     },
     {
+      "url": "word.index",
+      "name": "menu.word",
+      "icon": "menu-icon tf-icons bx bx-book-content",
+      "slug": "word.*"
+    },
+    {
       "name": "menu.account",
       "icon": "menu-icon tf-icons bx bx bx-user",
       "slug": "account.*",
