@@ -30,7 +30,7 @@ class WordController extends Controller
     public function create(Request $request): View
     {
         return view('pages.word.create', [
-            'letters' => Letter::all()->map(fn($item) => [$item->letter, $item->letter]),
+            'letters' => Letter::all()->map(fn ($item) => [$item->letter, $item->letter]),
         ]);
     }
 
@@ -71,7 +71,7 @@ class WordController extends Controller
     public function edit(Word $word): View
     {
         return view('pages.word.edit', [
-            'letters' => Letter::all()->map(fn($item) => [$item->letter, $item->letter]),
+            'letters' => Letter::all()->map(fn ($item) => [$item->letter, $item->letter]),
             'item' => $word,
         ]);
     }

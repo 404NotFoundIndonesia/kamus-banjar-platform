@@ -18,13 +18,13 @@ class Word extends Model
     ];
 
     protected $appends = [
-        'word_source'
+        'word_source',
     ];
 
     protected function wordSource(): Attribute
     {
         return new Attribute(
-            get: fn () => __('label.' . $this->source),
+            get: fn () => __('label.'.$this->source),
         );
     }
 
