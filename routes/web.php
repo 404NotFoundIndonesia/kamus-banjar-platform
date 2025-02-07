@@ -25,6 +25,7 @@ Route::middleware(['locale'])->group(function () {
         Route::get('/word/{word:word}/edit', [WordController::class, 'edit'])->name('word.edit');
         Route::put('/word/{word:word}', [WordController::class, 'update'])->name('word.update');
         Route::delete('/word/{word:word}', [WordController::class, 'destroy'])->name('word.destroy');
+        Route::post('/word/import', [WordController::class, 'import'])->name('word.import');
 
         Route::as('account.')->group(function () {
             Route::get('/account/profile', [ProfileController::class, 'edit'])->name('profile.edit');

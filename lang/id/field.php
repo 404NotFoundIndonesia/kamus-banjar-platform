@@ -23,4 +23,6 @@ return [
     'source' => 'Sumber',
     'data' => 'Data',
     'url' => 'URL',
+    'file' => 'Berkas',
+    'derivative' => 'Turunan',
 ];

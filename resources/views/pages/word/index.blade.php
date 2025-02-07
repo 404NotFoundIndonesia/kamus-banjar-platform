@@ -14,7 +14,7 @@
                         <a class="dropdown-item" href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#importWordUrlModal">
                             {{ __('label.import_from_url') }}
                         </a>
-                        <a class="dropdown-item" href="javascript:void(0);">
+                        <a class="dropdown-item" href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#importWordFileModal">
                             {{ __('label.import_file') }}
                         </a>
                     </div>
@@ -22,25 +22,58 @@
 
                 <div class="modal fade" id="importWordUrlModal" tabindex="-1" style="display: none;" aria-hidden="true">
                     <div class="modal-dialog" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLabel1">{{ __('label.import_from_url') }}</h5>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                            </div>
-                            <div class="modal-body">
-                                <div class="row">
-                                    <div class="col mb-6">
-                                        <x-forms.input name="url" />
+                        <form action="{{ route('word.import') }}" method="post">
+                            @csrf
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel1">{{ __('label.import_from_url') }}</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="row">
+                                        <div class="col mb-6">
+                                            <x-forms.input name="url" />
+                                        </div>
                                     </div>
                                 </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">{{ __('button.cancel') }}</button>
+                                    <button type="submit" class="btn btn-primary">{{ __('button.submit') }}</button>
+                                </div>
                             </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">{{ __('button.cancel') }}</button>
-                                <button type="button" class="btn btn-primary">{{ __('button.submit') }}</button>
-                            </div>
-                        </div>
+                        </form>
                     </div>
                 </div>
+
+                <div class="modal fade" id="importWordFileModal" tabindex="-1" style="display: none;" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <form action="{{ route('word.import') }}" method="post" enctype="multipart/form-data">
+                            @csrf
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel1">{{ __('label.import_from_url') }}</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="row">
+                                        <div class="col mb-6">
+                                            <div>
+                                                <label for="formFile" class="form-label">{{ __('field.file') }} (.json)</label>
+                                                <input class="form-control @error('file') is-invalid @enderror" type="file" name="file" accept=".json,application/json">
+                                                <span class="error invalid-feedback">{{ $errors->first('file') }}</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">{{ __('button.cancel') }}</button>
+                                    <button type="submit" class="btn btn-primary">{{ __('button.submit') }}</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
             </div>
         </div>
         <div class="table-responsive text-nowrap">
@@ -81,6 +114,10 @@
                 @endforeach
                 </tbody>
             </table>
+        </div>
+
+        <div class="card-body">
+            {!! $items->links() !!}
         </div>
     </div>
 @endsection

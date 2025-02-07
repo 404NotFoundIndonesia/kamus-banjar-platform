@@ -2,14 +2,18 @@
 
 namespace App\Http\Controllers;
 
+use App\Enum\PartOfSpeech;
+use App\Http\Requests\ImportWordRequest;
 use App\Http\Requests\StoreWordRequest;
 use App\Http\Requests\UpdateWordRequest;
+use App\Jobs\Word\Import;
 use App\Models\Letter;
 use App\Models\Word;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Storage;
 
 class WordController extends Controller
 {
@@ -62,6 +66,7 @@ class WordController extends Controller
     {
         return view('pages.word.show', [
             'item' => $word,
+            'partOfSpeech' => PartOfSpeech::abbreviation(),
         ]);
     }
 
@@ -103,6 +108,24 @@ class WordController extends Controller
     {
         try {
             $word->delete();
+
+            return redirect()->route('word.index')
+                ->with('notification', $this->successNotification('notification.success_create', 'menu.word'));
+        } catch (\Throwable $throwable) {
+            Log::error($throwable->getMessage());
+
+            return redirect()->route('word.index')
+                ->with('notification', $this->failNotification('notification.fail_create', 'menu.word'));
+        }
+    }
+
+    public function import(ImportWordRequest $request): RedirectResponse
+    {
+        try {
+            $input = $request->validated();
+            $path = isset($input['file']) ? Storage::path($input['file']->store('temp')) : $input['url'];
+
+            Import::dispatch($path);
 
             return redirect()->route('word.index')
                 ->with('notification', $this->successNotification('notification.success_create', 'menu.word'));

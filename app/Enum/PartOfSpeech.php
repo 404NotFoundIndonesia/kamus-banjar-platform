@@ -30,4 +30,23 @@ enum PartOfSpeech: string
     case DEMONSTRATIVE = 'dem';
     // art	        Article	        Limits a noun (e.g., "the", "a", "an").
     case ARTICLE = 'art';
+
+    public static function abbreviation(): array
+    {
+        return [
+            'n' => 'Nomina',
+            'v' => 'Verba',
+            'a' => 'Adjektiva',
+            'pro' => 'Pronomina',
+            'adv' => 'Adverbia',
+            'num' => 'Numeralia',
+            'p' => 'Partikel',
+            'konj' => 'Konjungsi',
+            'prep' => 'Preposisi',
+            'interj' => 'Interjeksi',
+            'klit' => 'Klitika',
+            'dem' => 'Demonstrativa',
+            'art' => 'Artikel',
+        ];
+    }
 }
