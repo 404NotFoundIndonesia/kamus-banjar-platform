@@ -32,11 +32,11 @@ class Import implements ShouldQueue
                 $this->store($word);
             }
 
-            if (!filter_var($this->path, FILTER_VALIDATE_URL)) {
+            if (! filter_var($this->path, FILTER_VALIDATE_URL)) {
                 Storage::delete($this->path);
             }
         } catch (\Throwable $exception) {
-            echo $exception->getMessage() . PHP_EOL;
+            echo $exception->getMessage().PHP_EOL;
         }
     }
 
