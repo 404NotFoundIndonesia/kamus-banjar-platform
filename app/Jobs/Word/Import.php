@@ -5,7 +5,6 @@ namespace App\Jobs\Word;
 use App\Models\Word;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Queue\Queueable;
-use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 
 class Import implements ShouldQueue
@@ -50,7 +49,8 @@ class Import implements ShouldQueue
         $word = $this->transformWord($word);
         $exists = Word::query()->where('word', $word['word'])->exists();
         if ($exists) {
-            echo 'SKIP ' . $word['word'] . PHP_EOL;
+            echo 'SKIP '.$word['word'].PHP_EOL;
+
             return;
         }
 
