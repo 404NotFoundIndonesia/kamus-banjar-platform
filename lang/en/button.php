@@ -12,5 +12,7 @@ return [
     'delete_permanently' => 'Delete My Account',
     'new_feature' => 'New :Feature',
     'import_feature' => 'Import :Feature',
+    'delete' => 'Delete',
+    'edit' => 'Edit',
 
 ];

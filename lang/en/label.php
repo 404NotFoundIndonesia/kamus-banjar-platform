@@ -33,4 +33,5 @@ return [
     'community' => 'Community',
     'import_from_url' => 'Import from URL',
     'import_file' => 'Import JSON File',
+    'selected' => 'Selected',
 ];

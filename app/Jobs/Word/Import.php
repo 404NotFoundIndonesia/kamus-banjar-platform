@@ -47,6 +47,10 @@ class Import implements ShouldQueue
         }
 
         $word = $this->transformWord($word);
+        $exists = Word::query()->where('word', $word['word'])->exists();
+        if ($exists) {
+            return;
+        }
 
         $w = Word::query()->create([
             'word' => $word['word'],

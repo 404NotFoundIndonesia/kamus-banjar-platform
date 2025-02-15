@@ -110,12 +110,29 @@ class WordController extends Controller
             $word->delete();
 
             return redirect()->route('word.index')
-                ->with('notification', $this->successNotification('notification.success_create', 'menu.word'));
+                ->with('notification', $this->successNotification('notification.success_delete', 'menu.word'));
         } catch (\Throwable $throwable) {
             Log::error($throwable->getMessage());
 
             return redirect()->route('word.index')
-                ->with('notification', $this->failNotification('notification.fail_create', 'menu.word'));
+                ->with('notification', $this->failNotification('notification.fail_delete', 'menu.word'));
+        }
+    }
+
+    public function destroyBulk(Request $request): RedirectResponse
+    {
+        try {
+            $input = $request->input('id');
+            $id = explode(',', $input);
+            Word::query()->whereIn('id', $id)->delete();
+
+            return redirect()->route('word.index')
+                ->with('notification', $this->successNotification('notification.success_delete', 'menu.word'));
+        } catch (\Throwable $throwable) {
+            Log::error($throwable->getMessage());
+
+            return redirect()->route('word.index')
+                ->with('notification', $this->failNotification('notification.fail_delete', 'menu.word'));
         }
     }
 
@@ -125,7 +142,15 @@ class WordController extends Controller
             $input = $request->validated();
             $path = isset($input['file']) ? Storage::path($input['file']->store('temp')) : $input['url'];
 
-            Import::dispatch($path);
+            if (str_contains($path, '*')) {
+                $letters = Letter::all();
+                foreach ($letters as $letter) {
+                    $newPath = str_replace('*', $letter->letter, $path);
+                    Import::dispatch($newPath);
+                }
+            } else {
+                Import::dispatch($path);
+            }
 
             return redirect()->route('word.index')
                 ->with('notification', $this->successNotification('notification.success_create', 'menu.word'));

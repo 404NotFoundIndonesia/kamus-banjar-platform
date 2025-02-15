@@ -80,6 +80,11 @@
             <table class="table">
                 <thead>
                 <tr>
+                    <th style="width: 50px">
+                        <input
+                            class="form-check-input"
+                            type="checkbox" id="select-all-checkbox">
+                    </th>
                     <th>{{ __('field.letter') }}</th>
                     <th>{{ __('field.word') }}</th>
                     <th>{{ __('field.source') }}</th>
@@ -89,6 +94,12 @@
                 <tbody class="table-border-bottom-0">
                 @foreach($items as $item)
                     <tr>
+                        <td>
+                            <input
+                                class="form-check-input row-checkbox"
+                                data-id="{{ $item->id }}" type="checkbox"
+                                value="{{ $item->word }}">
+                        </td>
                         <td class="text-capitalize fw-bold">{{ $item->letter }}</td>
                         <td>
                             <a href="{{ route('word.show', $item->word) }}">{{ $item->word }}</a>
@@ -101,11 +112,13 @@
                             <div class="dropdown">
                                 <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown"><i class="bx bx-dots-vertical-rounded"></i></button>
                                 <div class="dropdown-menu">
-                                    <a class="dropdown-item" href="{{ route('word.edit', $item->word) }}"><i class="bx bx-edit-alt me-1"></i> Edit</a>
+                                    <a class="dropdown-item" href="{{ route('word.edit', $item->word) }}"><i class="bx bx-edit-alt me-1"></i>
+                                        {{ __('button.edit') }}</a>
                                     <form action="{{ route('word.destroy', $item->word) }}" method="post">
                                         @csrf
                                         @method('DELETE')
-                                        <button class="dropdown-item" type="submit"><i class="bx bx-trash me-1"></i> Delete</button>
+                                        <button class="dropdown-item" type="submit"><i class="bx bx-trash me-1"></i>
+                                            {{ __('button.delete') }}</button>
                                     </form>
                                 </div>
                             </div>
@@ -120,4 +133,54 @@
             {!! $items->links() !!}
         </div>
     </div>
+
+    <div class="card position-fixed bottom-0 start-50 translate-middle-x mb-3 w-50" id="bulk-action-card" style="display: none">
+        <form action="{{ route('word.destroy.bulk') }}" method="post" id="destroy-bulk-form">
+            @method('DELETE')
+            @csrf
+            <div class="px-4 py-3 d-flex justify-content-between">
+                <div>
+                    <span id="how-much-selected"></span> {{ __('label.selected') }}
+                </div>
+                <div>
+                    <input type="hidden" name="id" value="0">
+                    <button class="btn btn-sm btn-outline-danger" type="submit">{{ __('button.delete') }}</button>
+                </div>
+            </div>
+        </form>
+    </div>
 @endsection
+
+@push('script')
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const checkboxes = document.querySelectorAll(".row-checkbox");
+            const selectAll = document.getElementById("select-all-checkbox");
+            const actionCard = document.getElementById('bulk-action-card');
+            const selectedLength = document.getElementById('how-much-selected');
+            const bulkDeleteForm = document.getElementById('destroy-bulk-form');
+
+            function updateSelect () {
+                const anyChecked = Array.from(checkboxes).some(checkbox => checkbox.checked);
+                actionCard.style.display = anyChecked ? "block" : "none";
+                if (anyChecked) {
+                    selectedLength.innerText = Array.from(checkboxes).filter(checkbox => checkbox.checked).length?.toString();
+                }
+            }
+
+            checkboxes.forEach(checkbox => {
+                checkbox.addEventListener("change", updateSelect);
+            });
+
+            selectAll.addEventListener("change", function () {
+                checkboxes.forEach(checkbox => checkbox.checked = selectAll.checked);
+                updateSelect();
+            });
+
+            bulkDeleteForm.addEventListener('submit', function (e) {
+                const ids = Array.from(checkboxes).filter(checkbox => checkbox.checked).map(c => c.dataset.id);
+                this.querySelector('input[name=id]').value = ids.join(',');
+            });
+        });
+    </script>
+@endpush
