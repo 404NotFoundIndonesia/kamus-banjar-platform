@@ -1,8 +1,6 @@
 <?php
 
 use Illuminate\Database\Migrations\Migration;
-use Illuminate\Database\Schema\Blueprint;
-use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
@@ -11,9 +9,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        DB::unprepared("DROP FUNCTION IF EXISTS LEVENSHTEIN;");
-        
-        DB::unprepared("CREATE FUNCTION LEVENSHTEIN(s1 VARCHAR(255), s2 VARCHAR(255)) RETURNS INT DETERMINISTIC BEGIN
+        DB::unprepared('DROP FUNCTION IF EXISTS LEVENSHTEIN;');
+
+        DB::unprepared('CREATE FUNCTION LEVENSHTEIN(s1 VARCHAR(255), s2 VARCHAR(255)) RETURNS INT DETERMINISTIC BEGIN
             DECLARE s1_len, s2_len, i, j, c, c_temp, cost INT;
             DECLARE s1_char CHAR;
             DECLARE cv0, cv1 VARBINARY(256);
@@ -60,7 +58,7 @@ return new class extends Migration
             END IF;
             
             RETURN c;
-        END;");
+        END;');
     }
 
     /**
@@ -68,6 +66,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        DB::unprepared("DROP FUNCTION IF EXISTS LEVENSHTEIN;");
+        DB::unprepared('DROP FUNCTION IF EXISTS LEVENSHTEIN;');
     }
 };
